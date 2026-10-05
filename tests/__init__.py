@@ -1,0 +1,1 @@
+"""Toolkit safety hook tests."""
