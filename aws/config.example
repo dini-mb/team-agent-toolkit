@@ -1,16 +1,13 @@
-# Replace all example values before adding these sections to ~/.aws/config.
-# Do not commit your personal AWS config or credentials.
-
-[profile example-source]
-sso_session = example-sso
-sso_account_id = 123456789012
-sso_role_name = ExampleSourceRole
-region = ap-southeast-2
-
-[profile example-agent]
-credential_process = /absolute/path/to/readonly-agent.sh example-source arn:aws:iam::123456789012:role/ExampleReadOnlyRole
-region = ap-southeast-2
-
-[sso-session example-sso]
-sso_start_url = https://example.awsapps.com/start
+[sso-session <org>-sso]
+sso_start_url = https://d-<directory-id>.awsapps.com/start
 sso_region = ap-southeast-2
+
+[profile <project>-dev-admin]
+sso_session = <org>-sso
+sso_account_id = <account-id>
+sso_role_name = sso-admin
+region = ap-southeast-2
+
+[profile <project>-dev-agent]
+credential_process = /home/<wsl-user>/.aws/readonly-agent.sh <project>-dev-admin arn:aws:iam::<account-id>:role/sso-admin
+region = ap-southeast-2
