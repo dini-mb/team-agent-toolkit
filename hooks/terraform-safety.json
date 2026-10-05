@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "python3 \"$HOME/.copilot/hooks/deny-terraform-deploy.py\"",
+        "timeout": 5
+      }
+    ]
+  }
+}

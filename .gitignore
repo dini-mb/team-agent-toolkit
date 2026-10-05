@@ -118,6 +118,13 @@ ipython_config.py
 .pdm-python
 .pdm-build/
 
+# Local AWS credentials and config; keep aws/config.example tracked.
+.aws/
+aws/config
+aws/credentials
+aws/credentials.*
+*.pem
+
 # pixi
 #   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
 # pixi.lock

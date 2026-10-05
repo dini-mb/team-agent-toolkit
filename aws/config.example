@@ -1,0 +1,13 @@
+[sso-session <org>-sso]
+sso_start_url = https://d-<directory-id>.awsapps.com/start
+sso_region = ap-southeast-2
+
+[profile <project>-dev-admin]
+sso_session = <org>-sso
+sso_account_id = <account-id>
+sso_role_name = sso-admin
+region = ap-southeast-2
+
+[profile <project>-dev-agent]
+credential_process = /home/<wsl-user>/.aws/readonly-agent.sh <project>-dev-admin arn:aws:iam::<account-id>:role/sso-admin
+region = ap-southeast-2
