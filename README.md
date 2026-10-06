@@ -62,21 +62,21 @@ In VS Code, select the Local session target and confirm skills and hooks appear 
 
 ## AWS config
 
-The installer does not modify `~/.aws/config`. Review the sanitised `aws/config` example, then add its sections to your existing config. Replace every placeholder with values from your AWS IAM Identity Center and account setup; do not replace the whole config.
+The installer does not modify `~/.aws/config`. Review the sanitised `aws/config.example`, then add its sections to your existing config. Replace every placeholder with values from your AWS IAM Identity Center and account setup; do not replace the whole config.
 
 ```ini
 [sso-session <org>-sso]
 sso_start_url = https://d-<directory-id>.awsapps.com/start
 sso_region = ap-southeast-2
 
-[profile <project>-dev-admin]
+[profile <project>-nonprod-admin]
 sso_session = <org>-sso
 sso_account_id = <account-id>
 sso_role_name = sso-admin
 region = ap-southeast-2
 
-[profile <project>-dev-agent]
-credential_process = /home/<wsl-user>/.aws/readonly-agent.sh <project>-dev-admin arn:aws:iam::<account-id>:role/sso-admin
+[profile <project>-nonprod-agent]
+credential_process = /home/<wsl-user>/.aws/readonly-agent.sh <project>-nonprod-admin arn:aws:iam::<account-id>:role/sso-admin
 region = ap-southeast-2
 ```
 
@@ -85,10 +85,10 @@ Replace `<org>`, `<project>`, `<directory-id>`, `<account-id>`, and `<wsl-user>`
 Install AWS CLI v2 and `jq`. From your own terminal, start device-code sign-in for the source profile with:
 
 ```sh
-aws sso login --use-device-code --no-browser --profile <project>-dev-admin
+aws sso login --use-device-code --no-browser --profile <project>-nonprod-admin
 ```
 
-Then check the agent profile with `aws sts get-caller-identity --profile <project>-dev-agent`. Use an agent profile ending in `-agent` for AWS CLI commands issued by Copilot.
+Then check the agent profile with `aws sts get-caller-identity --profile <project>-nonprod-agent`. Use an agent profile ending in `-agent` for AWS CLI commands issued by Copilot.
 
 ## Guardrails and tests
 
